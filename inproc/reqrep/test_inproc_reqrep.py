@@ -21,37 +21,67 @@ s2.connect("inproc://test-1")
 s3.connect("inproc://test-1")
 
 client_list = ["s2", "s3"]
-while(1):
 
-  # choose the client to communicate
-  client = random.choice(client_list)
+# global counters messages processed by s1, s2 and s3
+s1_msg_processed = 0
+s2_msg_processed = 0
+s3_msg_processed = 0
 
-  if client == 's2':
+try:
 
-    # start communicating
-    s2.send("hello from socket, s2")
-    # field the request
-    print s1.recv()
-    # send a reponse back
-    resp = 'hello from socket, s1'
-    s1.send(resp)
-    print s2.recv()
+  start_time = time.time()
 
-  elif client == 's3':
+  while(1):
 
-    # start communicating
-    s3.send("hello from socket, s3")
-    # field the request
-    print s1.recv()
-    # send a reponse back
-    resp = 'hello from socket, s1'
-    s1.send(resp)
-    print s3.recv()
+    # choose the client to communicate
+    client = random.choice(client_list)
 
-  time.sleep(1)  
+    if client == 's2':
 
+      # start communicating
+      s2.send("hello from socket, s2")
 
+      # field the request
+      print s1.recv()
 
+      # send a reponse back
+      resp = 'hello from socket, s1'
+      s1.send(resp)
 
+      s1_msg_processed = s1_msg_processed + 1
 
+      print s2.recv()
+
+      s2_msg_processed = s2_msg_processed + 1
+
+    elif client == 's3':
+
+      # start communicating
+      s3.send("hello from socket, s3")
+
+      # field the request
+      print s1.recv()
+
+      # send a reponse back
+      resp = 'hello from socket, s1'
+      s1.send(resp)
+
+      s1_msg_processed = s1_msg_processed + 1
+
+      print s3.recv()
+
+      s3_msg_processed = s3_msg_processed + 1
+
+except KeyboardInterrupt, e:
+  end_time = time.time()
+
+  delta = end_time - start_time
+
+  print 'total messages processed by s1: %s' % s1_msg_processed
+  print 'total messages processed by s2: %s' % s2_msg_processed
+  print 'total messages processed by s3: %s' % s3_msg_processed
+
+  print 'messages processed by s1 per second: %s' % str(int(s1_msg_processed / delta))
+  print 'messages processed by s2 per second: %s' % str(int(s2_msg_processed / delta))
+  print 'messages processed by s3 per second: %s' % str(int(s3_msg_processed / delta))
 
