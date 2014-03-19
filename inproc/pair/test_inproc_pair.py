@@ -10,7 +10,6 @@ import nanomsg as nn
 # deploy 2 sockets for intra process communication
 s1 = nn.Socket(domain=nn.AF_SP, protocol=nn.PAIR)
 s2 = nn.Socket(domain=nn.AF_SP, protocol=nn.PAIR)
-s3 = nn.Socket(domain=nn.AF_SP, protocol=nn.PAIR)
 
 # bind the two sockets to respective endpoints
 s1.bind("inproc://test-1")
