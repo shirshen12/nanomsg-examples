@@ -44,6 +44,6 @@ except KeyboardInterrupt, e:
   print 'total message processed by s1: %s' % str(s1_msg_processed) 
   print 'total message processed by s2: %s' % str(s2_msg_processed) 
 
-  print 'message processed by s1 per second: %s' % str(s1_msg_processed / (end_time - start_time))
-  print 'message processed by s2 per second: %s' % str(s2_msg_processed / (end_time - start_time))
+  print 'message processed by s1 per second: %s' % str(int(s1_msg_processed / (end_time - start_time)))
+  print 'message processed by s2 per second: %s' % str(int(s2_msg_processed / (end_time - start_time)))
 
