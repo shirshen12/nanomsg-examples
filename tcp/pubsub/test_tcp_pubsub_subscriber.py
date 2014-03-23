@@ -9,6 +9,7 @@ def main():
   
   # declare a socket
   subscriber_sock = nn.Socket(domain=nn.AF_SP, protocol=nn.SUB)
+  subscriber_sock.set_string_option(level=nn.SUB, option=nn.SUB_SUBSCRIBE, value="")
 
   # bind the above socket to an endpoint
   subscriber_sock.connect("tcp://127.0.0.1:50000")
