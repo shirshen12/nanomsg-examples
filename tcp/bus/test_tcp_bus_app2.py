@@ -17,6 +17,7 @@ def main():
   app_sock.bind("tcp://127.0.0.1:50001")
 
   # bind the above socket to an endpoint
+  app_sock.connect("tcp://127.0.0.1:50000")
   app_sock.connect("tcp://127.0.0.1:50002")
   app_sock.connect("tcp://127.0.0.1:50003")
 
